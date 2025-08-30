@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../types";
 
 export default function ProfilePage() {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -152,8 +153,8 @@ export default function ProfilePage() {
               onClick={() => {
                 setEditMode(false);
                 setFormData({
-                  name: user.name,
-                  email: user.email,
+                  name: user?.name || "",
+                  email: user?.email || "",
                 });
                 setMessage(null);
               }}
