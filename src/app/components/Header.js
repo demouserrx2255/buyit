@@ -76,7 +76,7 @@ export default function Header() {
           </nav>
         </div>
       </header> */}
-      <header className="sticky top-0 z-50 bg-white ">
+      <header data-testid="header" className="sticky top-0 z-50 bg-white ">
         <div className="mx-auto max-w-[85rem] px-6 sm:px-6 lg:px-8">
           <div className="flex h-24 items-center justify-between">
             <div className="flex items-center gap-6">
@@ -84,6 +84,7 @@ export default function Header() {
                 href="/"
                 className="flex items-center gap-2"
                 aria-label="Go to homepage"
+                data-testid="logo"
               >
                 <Image
                   src="/buyit-logo.svg"
@@ -91,6 +92,7 @@ export default function Header() {
                   width={150}
                   height={50}
                   priority
+                  data-testid="logo-image"
                 />
               </Link>
 
@@ -102,25 +104,26 @@ export default function Header() {
             </div>
             {user ? (
               <>
-                <div className="flex items-center gap-6 text-2xl font-extrabold">
+                <div className="flex items-center gap-6 text-2xl font-extrabold" data-testid="user-menu">
                   <button
                     aria-label="Open cart"
                     onClick={() => router.push("/cart")}
                     className="relative"
+                    data-testid="cart-button"
                   >
                     <RiShoppingCartLine />
-                    <span className="absolute -top-2 -right-3 text-xs bg-black text-white rounded-full px-2 py-0.5">
+                    <span className="absolute -top-2 -right-3 text-xs bg-black text-white rounded-full px-2 py-0.5" data-testid="cart-count">
                       {cartCount || 0}
                     </span>
                   </button>
-                  <Link href="/orders" className="underline">
+                  <Link href="/orders" className="underline" data-testid="orders-link" aria-label="My orders">
                     <TbShoppingCartCopy></TbShoppingCartCopy>
                   </Link>
-                  <Link href="/user" className="underline">
+                  <Link href="/user" className="underline" data-testid="profile-link" aria-label="My profile">
                     <CgProfile />
                   </Link>
                   {user.role === "admin" && (
-                    <Link href="/admin" className="">
+                    <Link href="/admin" className="" data-testid="admin-link" aria-label="Admin dashboard">
                       <RxDashboard></RxDashboard>
                     </Link>
                   )}
@@ -128,6 +131,8 @@ export default function Header() {
                     <button
                       onClick={handleLogout}
                       className=""
+                      data-testid="logout-button"
+                      aria-label="Logout"
                     >
                       <RiLogoutBoxRLine></RiLogoutBoxRLine>
                     </button>

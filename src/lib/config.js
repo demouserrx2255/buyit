@@ -3,7 +3,7 @@
 const config = {
   // API Configuration
   api: {
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://buyitbe.onrender.com',
+    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
     timeout: 10000,
     withCredentials: false,
   },
