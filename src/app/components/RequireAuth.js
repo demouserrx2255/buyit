@@ -11,7 +11,7 @@ export default function RequireAuth({ children }) {
 
 	useEffect(() => {
 		if (!token || !user) {
-			// router.replace('/login');
+			router.replace('/login');
 		}
 	}, [token, user, router]);
 

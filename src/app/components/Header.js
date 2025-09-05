@@ -17,14 +17,14 @@ export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
   const cartCount = useSelector((s) =>
-    s.cart.items.reduce((sum, it) => sum + it.quantity, 0)
+    s?.cart?.items?.reduce((sum, it) => sum + it.quantity, 0)
   );
   const cart = useSelector((s) => s.cart);
   const user = useSelector((s) => s.auth.user);
 
   const handleLogout = () => {
     dispatch(logout());
-    // router.push("/");
+    router.push("/");
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function Header() {
                     data-testid="cart-button"
                   >
                     <RiShoppingCartLine />
-                    <span className="absolute -top-2 -right-3 text-xs bg-black text-white rounded-full px-2 py-0.5" data-testid="cart-count">
+                    <span  className="absolute -top-2 -right-3 text-xs bg-black text-white rounded-full px-2 py-0.5" data-testid="cart-count">
                       {cartCount || 0}
                     </span>
                   </button>

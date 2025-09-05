@@ -30,7 +30,10 @@ export default function OrdersPage() {
               ✕
             </button>
 
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2
+              className="text-2xl font-bold text-gray-900 mb-2"
+              data-testid="success-message"
+            >
               Order #{selectedOrder._id}
             </h2>
 
@@ -48,7 +51,7 @@ export default function OrdersPage() {
                 Updated: {new Date(selectedOrder.updatedAt).toLocaleString()}
               </p>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4" data-testid="order-id">
               {selectedOrder.items.map((item, index) => (
                 <div
                   key={index}
@@ -113,7 +116,10 @@ export default function OrdersPage() {
             >
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-gray-800 font-semibold">
+                  <p
+                    className="text-gray-800 font-semibold"
+                    data-testid="order-id"
+                  >
                     Order #{order._id}
                   </p>
                   <p className="text-sm text-gray-600">

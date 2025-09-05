@@ -74,7 +74,9 @@ export default function CartPage() {
                   className="flex items-center justify-between border rounded-md p-3 bg-white"
                 >
                   <div>
-                    <p className="font-medium text-black">{it?.product?.name}</p>
+                    <p className="font-medium text-black">
+                      {it?.product?.name}
+                    </p>
                     <p className="text-sm text-gray-600">Qty: {it?.quantity}</p>
                   </div>
                   <div className="flex items-center gap-3">
@@ -97,6 +99,7 @@ export default function CartPage() {
               </p>
               {!isCheckout ? (
                 <button
+                  data-testid="checkout-button"
                   className="bg-black text-white rounded px-4 py-2"
                   onClick={() => setIsCheckout(true)}
                 >
@@ -106,6 +109,7 @@ export default function CartPage() {
                 <button
                   className="bg-black text-white rounded px-4 py-2"
                   onClick={() => setShowAddressModal(true)}
+                  data-testid="continue-shopping"
                 >
                   Enter Address & Pay
                 </button>
@@ -133,6 +137,7 @@ export default function CartPage() {
                   onChange={handleAddressChange}
                   className="w-full border rounded p-2"
                   placeholder="123 Main St"
+                  data-testid="input-street"
                 />
               </div>
               <div>
@@ -146,6 +151,7 @@ export default function CartPage() {
                   onChange={handleAddressChange}
                   className="w-full border rounded p-2"
                   placeholder="City"
+                  data-testid="input-city"
                 />
               </div>
               <div>
@@ -159,6 +165,7 @@ export default function CartPage() {
                   onChange={handleAddressChange}
                   className="w-full border rounded p-2"
                   placeholder="State"
+                  data-testid="input-state"
                 />
               </div>
               <div>
@@ -172,6 +179,7 @@ export default function CartPage() {
                   onChange={handleAddressChange}
                   className="w-full border rounded p-2"
                   placeholder="Zip Code"
+                  data-testid="input-zipCode"
                 />
               </div>
               <div>
@@ -182,6 +190,7 @@ export default function CartPage() {
                   className="w-full border rounded p-2"
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
+                  data-testid="select-payment-method"
                 >
                   <option value="creditCard">Credit Card</option>
                   <option value="paypal">PayPal</option>
@@ -199,6 +208,7 @@ export default function CartPage() {
               <button
                 className="bg-black text-white rounded px-4 py-2"
                 onClick={submitOrder}
+                data-testid="confirm-payment"
               >
                 Confirm & Pay
               </button>

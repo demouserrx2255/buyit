@@ -19,12 +19,17 @@ function LoginPageInner() {
   const [email, setEmail] = useState("test@example.com");
   const [password, setPassword] = useState("secret123");
 
-  // Redirect after successful login
+  useEffect(() => {
+    if (error) {
+      setPassword("");
+      setEmail("");
+    }
+  }, [error]);
+
   useEffect(() => {
     if (status === "succeeded" && user) {
       router.replace("/");
     }
-    console.log(error,"Auth status:", status, "User:", user);
   }, [status, user, router]);
 
   const onSubmit = (e) => {
@@ -32,16 +37,16 @@ function LoginPageInner() {
     dispatch(login({ email, password }));
   };
 
-  // Show loading while checking authentication
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div data-testid="loading" className="text-lg">
+          Loading...
+        </div>
       </div>
     );
   }
 
-  // Don't render the form if user is authenticated (they'll be redirected)
   if (user) {
     return null;
   }
@@ -51,14 +56,18 @@ function LoginPageInner() {
       className="min-h-screen flex items-center justify-center p-8"
       suppressHydrationWarning
     >
+      <title>Login</title>
       <form
+        data-testid="login-form"
         onSubmit={onSubmit}
         className="w-full max-w-sm space-y-6"
         suppressHydrationWarning
         autoComplete="off"
       >
         <h1 className="text-xl font-semibold">Login</h1>
+
         <input
+          data-testid="email-input"
           type="email"
           placeholder="Email"
           className="w-full border rounded px-3 py-2"
@@ -67,7 +76,9 @@ function LoginPageInner() {
           required
           autoComplete="username"
         />
+
         <input
+          data-testid="password-input"
           type="password"
           placeholder="Password"
           className="w-full border rounded px-3 py-2"
@@ -77,6 +88,7 @@ function LoginPageInner() {
           autoComplete="current-password"
         />
         <button
+          data-testid="login-button"
           type="submit"
           className="w-full bg-black text-white rounded px-4 py-2 disabled:opacity-50"
           disabled={status === "loading"}
@@ -85,11 +97,19 @@ function LoginPageInner() {
         </button>
         <div className="mt-3 text-center text-sm">
           Don't have an account?{" "}
-          <Link href="/register" className="text-blue-600 underline">
+          <Link
+            data-testid="register-link"
+            href="/register"
+            className="text-blue-600 underline"
+          >
             Register
           </Link>
         </div>
-        {error && <p className="text-red-600 text-sm">{error}</p>}
+        {error && (
+          <p data-testid="error-message" className="text-red-600 text-sm">
+            {error}
+          </p>
+        )}
         {status === "succeeded" && (
           <p className="text-green-600 text-sm">
             Login successful! Redirecting...
